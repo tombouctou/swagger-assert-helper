@@ -84,7 +84,7 @@ class SwaggerWrapper extends \PHPUnit_Framework_Assert
         if ($operation->security) {
             if ($this->swagger->securityDefinitions) {
                 foreach ($this->swagger->securityDefinitions as $definition) {
-                    if ($operation->security == $definition->securityDefinition) {
+                    if (count($operation->security) && is_array($operation->security[0]) && isset($operation->security[0][$definition->securityDefinition])) {
                         $operation->parameters[] = new Parameter(
                             [
                                 'name' => $definition->name,
